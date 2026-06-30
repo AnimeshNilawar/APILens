@@ -1,0 +1,7 @@
+node_modules/
+output/
+openapi.json
+.ai-cache.json
+.env
+.DS_Store
+Thumbs.db
