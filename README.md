@@ -10,7 +10,7 @@ Static analysis tool that parses Spring Boot Java source code and generates a co
 - **Impact Analysis** — Click any node in the dependency graph to see affected classes, endpoints, and DTOs
 - **API Maturity Report** — Rule-based scoring across security, performance, REST design, documentation, and architecture categories
 - **AI Enrichment** — Optional AI-generated endpoint descriptions, architecture reviews, best practices, and warnings (Gemini, OpenAI, Claude)
-- **Rule Engine** — Extensible maturity rules in `rules/maturity-rules.js` — add new rules without changing scoring logic
+- **Rule Engine** — Extensible maturity rules in `src/rules/maturity-rules.js` — add new rules without changing scoring logic
 
 ## Quick Start
 
@@ -34,7 +34,7 @@ node parser.js ./my-project/src/main/java
 # Analyze a single file
 node parser.js ./my-project/src/main/java/com/example/MyController.java
 
-# Default: uses sample-spring-boot project
+# Default: uses sample/sample-spring-boot project
 node parser.js
 ```
 
@@ -62,7 +62,7 @@ Without an API key, the tool works identically — just skips the AI step.
 
 ## Rule Engine
 
-Maturity rules live in `rules/maturity-rules.js`. Each rule is:
+Maturity rules live in `src/rules/maturity-rules.js`. Each rule is:
 
 ```js
 {
@@ -82,7 +82,7 @@ Add new rules to the `RULES` array — no other code changes needed.
 
 ## Sample Project
 
-`sample-spring-boot/` contains a demo e-commerce API (orders, products, users) with in-memory repositories. Used for development and testing.
+`sample/sample-spring-boot/` contains a demo e-commerce API (orders, products, users) with in-memory repositories. Used for development and testing.
 
 ## How It Works
 

@@ -506,8 +506,8 @@ const APP_JS = `
     return html;
   }
 
-  var sidebarHtml = '<div class="header"><h1>API Documentation</h1><div class="subtitle">' + endpoints.length + ' endpoints</div></div>';
-  sidebarHtml += '<input id="search" type="text" placeholder="Search endpoints..." oninput="window.renderFilter(this.value)">';
+  var sidebarHtml = '<div class="header"><h1>APILens</h1><div class="subtitle">' + endpoints.length + ' endpoints</div></div>';
+  sidebarHtml += '<input id="search" type="text" placeholder="AI-Powered API Intelligence Platform" oninput="window.renderFilter(this.value)">';
 
   var tagKeys = Object.keys(grouped).sort();
   var tagDescMap = {};
