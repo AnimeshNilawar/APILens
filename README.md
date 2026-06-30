@@ -1,4 +1,4 @@
-# Doc Generator
+# APILens
 
 Static analysis tool that parses Spring Boot Java source code and generates a complete API documentation platform — OpenAPI 3.x spec, HTML documentation site, dependency graphs, and AI-enriched insights.
 
