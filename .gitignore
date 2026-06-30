@@ -5,3 +5,4 @@ openapi.json
 .env
 .DS_Store
 Thumbs.db
+sample/*/target/
