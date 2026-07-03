@@ -348,6 +348,7 @@ const { generateDocSite } = require('./doc-site-generator');
 const { analyzeDependencies, buildCallChain } = require('./dependency-analyzer');
 const { enrichSpec } = require('./ai/enrich');
 const { computeMaturityReport } = require('./maturity-scorer');
+const { SnapshotManager } = require('./snapshot/snapshot-manager');
 
 const projectDir = (function() {
     const raw = process.argv[2];
@@ -396,12 +397,26 @@ for (const [name, info] of Object.entries(depData.classes || {})) {
 spec['x-classes'] = xClasses;
 spec['x-maturity'] = computeMaturityReport(spec);
 
+function deriveProjectName(projectDir) {
+  const raw = process.argv[2];
+  if (raw) return path.basename(path.resolve(raw));
+  const parts = projectDir.split(path.sep);
+  const srcIndex = parts.lastIndexOf('src');
+  if (srcIndex >= 2) return parts[srcIndex - 1];
+  return parts[parts.length - 1] || 'project';
+}
+
 (async function() {
+  const snapshotManager = new SnapshotManager({
+    outputRoot: './output',
+    projectName: deriveProjectName(projectDir),
+  });
+
   try {
-    const enriched = await enrichSpec(spec);
-    generateDocSite(enriched, './output');
+    const specToUse = await enrichSpec(spec);
+    await snapshotManager.createSnapshot(specToUse);
   } catch (err) {
     console.warn('AI enrichment error:', err.message);
-    generateDocSite(spec, './output');
+    await snapshotManager.createSnapshot(spec);
   }
 })();
