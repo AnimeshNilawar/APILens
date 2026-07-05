@@ -58,4 +58,16 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PatchMapping("/{id}/role")
+    public ResponseEntity<UserResponse> updateUserRole(@PathVariable Long id, @RequestBody CreateUserRequest request) {
+        return ResponseEntity.ok(userService.updateRole(id, request));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<UserResponse>> searchUsers(@RequestParam(defaultValue = "") String q,
+                                                            @RequestParam(defaultValue = "0") int page,
+                                                            @RequestParam(defaultValue = "20") int size) {
+        return ResponseEntity.ok(userService.search(q, page, size));
+    }
 }

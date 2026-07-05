@@ -39,11 +39,10 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(request));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long id, @Valid @RequestBody CreateProductRequest request) {
         try {
-            productService.delete(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok(productService.update(id, request));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.notFound().build();
         }

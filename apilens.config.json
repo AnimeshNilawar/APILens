@@ -1,0 +1,32 @@
+{
+    "diff": {
+        "compare": {
+            "paths": true,
+            "operations": true,
+            "parameters": true,
+            "requestBodies": true,
+            "responses": true,
+            "schemas": true,
+            "properties": true,
+            "security": true,
+            "servers": true,
+            "tags": true,
+            "examples": false,
+            "descriptions": false,
+            "summaries": false,
+            "operationIds": true,
+            "deprecated": true,
+            "vendorExtensions": false,
+            "aiMetadata": false
+        },
+        "ignore": {
+            "fields":[
+                "x-confidence",
+                "x-explanation",
+                "x-useCase",
+                "x-bestPractices",
+                "x-warnings"
+            ]
+        }
+    }
+}

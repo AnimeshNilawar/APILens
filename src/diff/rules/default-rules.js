@@ -1,0 +1,46 @@
+var DEFAULTS = {
+  diff: {
+    compare: {
+      paths: true,
+      operations: true,
+      parameters: true,
+      requestBodies: true,
+      responses: true,
+      schemas: true,
+      properties: true,
+      security: true,
+      servers: true,
+      tags: true,
+      examples: true,
+      descriptions: true,
+      summaries: true,
+      operationIds: true,
+      deprecated: true,
+      default: true,
+      format: true,
+      nullable: true,
+      required: true,
+      enums: true,
+      vendorExtensions: false,
+      aiMetadata: false,
+      extensions: false,
+    },
+    ignore: {
+      fields: [
+        'x-confidence',
+        'x-explanation',
+        'x-useCase',
+        'x-bestPractices',
+        'x-warnings',
+        'x-possibleErrors',
+        'x-flow',
+        'x-calls',
+        'x-classes',
+        'x-maturity',
+        'x-dependencies',
+      ],
+    },
+  },
+};
+
+module.exports = { DEFAULTS };

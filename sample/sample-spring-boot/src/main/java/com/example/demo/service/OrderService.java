@@ -5,7 +5,6 @@ import com.example.demo.dto.response.OrderResponse;
 import com.example.demo.entity.Order;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.OrderRepository;
-import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -38,18 +37,10 @@ public class OrderService {
         if (!userRepository.existsById(request.getUserId())) {
             throw new ResourceNotFoundException("User not found with id: " + request.getUserId());
         }
-        for (Long pid : request.getProductIds()) {
-            if (!productRepository.existsById(pid)) {
-                throw new ResourceNotFoundException("Product not found with id: " + pid);
-            }
-        }
-        double total = request.getProductIds().stream()
-                .mapToDouble(pid -> productRepository.findById(pid).getPrice())
-                .sum();
         Order order = new Order();
         order.setUserId(request.getUserId());
-        order.setProductIds(request.getProductIds());
-        order.setTotalAmount(total);
+        order.setShippingAddress(request.getShippingAddress());
+        order.setTotalAmount(0.0);
         order.setStatus("CREATED");
         order.setCreatedAt(LocalDateTime.now());
         return OrderResponse.fromEntity(orderRepository.save(order));

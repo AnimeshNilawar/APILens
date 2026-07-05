@@ -40,4 +40,14 @@ public class ProductService {
         if (!productRepository.existsById(id)) throw new ResourceNotFoundException("Product not found with id: " + id);
         productRepository.deleteById(id);
     }
+
+    public ProductResponse update(Long id, CreateProductRequest request) {
+        Product product = productRepository.findById(id);
+        if (product == null) throw new ResourceNotFoundException("Product not found with id: " + id);
+        product.setName(request.getName());
+        product.setDescription(request.getDescription());
+        product.setPrice(request.getPrice());
+        product.setStock(request.getStock());
+        return ProductResponse.fromEntity(productRepository.save(product));
+    }
 }

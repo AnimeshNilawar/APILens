@@ -15,8 +15,15 @@ const METHOD_BADGE_CSS = Object.entries(METHOD_COLORS)
 
 const CSS = `*{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,sans-serif;background:#1e1e1e;color:#d4d4d4;margin:0}
-#app{display:flex;min-height:100vh}
-#app aside{width:300px;min-width:300px;background:#252526;border-right:1px solid #3c3c3c;overflow-y:auto;height:100vh;position:sticky;top:0;display:flex;flex-direction:column}
+.navbar{display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 20px;background:#1e1e1e;border-bottom:1px solid #3c3c3c;flex-shrink:0}
+.navbar .nav-title{font-size:13px;color:#888;display:flex;align-items:center;gap:8px}
+.navbar .nav-title strong{color:#e0e0e0}
+.navbar .nav-links{display:flex;align-items:center;gap:16px}
+.navbar .nav-links a{color:#888;font-size:13px;text-decoration:none;padding:4px 8px;border-radius:4px;transition:color .2s,background .2s}
+.navbar .nav-links a:hover{color:#d4d4d4;background:#2d2d2d}
+#app{display:flex;flex-direction:column;min-height:100vh}
+#app .app-body{display:flex;flex:1;min-height:0}
+#app .app-body aside{width:300px;min-width:300px;background:#252526;border-right:1px solid #3c3c3c;overflow-y:auto;height:calc(100vh - 44px);position:sticky;top:44px;display:flex;flex-direction:column}
 #app aside .header{padding:16px;border-bottom:1px solid #3c3c3c}
 #app aside .header h1{font-size:16px;font-weight:600;color:#e0e0e0}
 #app aside .header .subtitle{font-size:12px;color:#888;margin-top:2px}
@@ -30,7 +37,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,sans-
 .sidebar-endpoint:hover{background:#2d2d2d}
 .sidebar-endpoint .method-badge{font-size:10px;font-weight:700;padding:1px 6px;border-radius:3px;text-transform:uppercase;min-width:44px;text-align:center}
 .sidebar-endpoint .path-text{color:#9a9a9a;font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:12px}
-#app main{flex:1;padding:32px 48px;max-width:960px;overflow-y:auto}
+#app .app-body main{flex:1;padding:32px 48px;max-width:960px;overflow-y:auto}
 .stats{display:flex;gap:24px;margin-bottom:32px}
 .stat-card{background:#252526;border:1px solid #3c3c3c;border-radius:8px;padding:16px 24px;flex:1}
 .stat-card .stat-value{font-size:28px;font-weight:700;color:#e0e0e0}
@@ -539,6 +546,7 @@ const APP_JS = `
 
   sidebarHtml += '<div class="sidebar-tag"><div class="sidebar-tag-header"><a href="#" onclick="event.preventDefault();document.getElementById(\\'architecture-section\\').scrollIntoView({behavior:\\'smooth\\'})" style="color:#888;text-decoration:none">Architecture</a></div></div>';
 
+
   function buildEndpointCard(ep) {
     var op = ep.operation;
     var html = '<div class="endpoint-card" data-path="' + esc(ep.path) + '" data-method="' + ep.method + '">';
@@ -813,7 +821,7 @@ const APP_JS = `
   };
 
   // Initial render
-  var appHtml = '<aside id="sidebar">' + sidebarHtml + '</aside><main><div id="main-content"></div></main>';
+  var appHtml = '<div class="navbar"><div class="nav-title"><strong>APILens</strong> &middot; API Documentation</div><div class="nav-links"><a href="/reports">Reports</a></div></div><div id="app"><div class="app-body"><aside id="sidebar">' + sidebarHtml + '</aside><main><div id="main-content"></div></main></div></div>';
   appHtml += '<div id="impact-backdrop" class="impact-panel-backdrop" onclick="impactPanel(\\'close\\')"></div>';
   appHtml += '<div id="impact-panel" class="impact-panel"></div>';
   document.getElementById('app').innerHTML = appHtml;

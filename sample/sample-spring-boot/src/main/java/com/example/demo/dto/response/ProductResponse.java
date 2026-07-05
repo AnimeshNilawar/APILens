@@ -8,19 +8,21 @@ public class ProductResponse {
     private String description;
     private double price;
     private int stock;
+    private String category;
 
     public ProductResponse() {}
 
-    public ProductResponse(Long id, String name, String description, double price, int stock) {
+    public ProductResponse(Long id, String name, String description, double price, int stock, String category) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
+        this.category = category;
     }
 
     public static ProductResponse fromEntity(Product product) {
-        return new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getStock());
+        return new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getStock(), product.getCategory());
     }
 
     public Long getId() { return id; }
@@ -33,4 +35,6 @@ public class ProductResponse {
     public void setPrice(double price) { this.price = price; }
     public int getStock() { return stock; }
     public void setStock(int stock) { this.stock = stock; }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
 }
